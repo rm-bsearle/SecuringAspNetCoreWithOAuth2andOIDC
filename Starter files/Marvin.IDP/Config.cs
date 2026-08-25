@@ -22,7 +22,7 @@ public static class Config
             new Client
             {
                 ClientName = "Image Gallery",
-                ClientId = "imagegallerclient",
+                ClientId = "imagegalleryclient",
                 AllowedGrantTypes = GrantTypes.Code,
                 RedirectUris =
                 {
@@ -36,7 +36,8 @@ public static class Config
                 ClientSecrets =
                 {
                     new Secret("secret".Sha256()),
-                }
+                },
+                RequireConsent = true,
             }
         };
 }
