@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,25 @@ builder.Services.AddHttpClient("APIClient", client =>
     client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
 });
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+}).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+.AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
+{
+    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.Authority = "https://localhost:5001";
+    options.ClientId = "imagegalleryclient";
+    options.ClientSecret = "secret";
+    options.ResponseType = "code";
+    // The following are commented out because they are the defaults but are added for reference
+    // options.Scope.Add("openid");
+    // options.Scope.Add("profile");
+    // options.CallbackPath = new PathString("signin-oidc");
+    options.SaveTokens = true;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +50,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
