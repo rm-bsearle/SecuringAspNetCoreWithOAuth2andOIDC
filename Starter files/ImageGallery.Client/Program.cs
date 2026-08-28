@@ -39,6 +39,7 @@ builder.Services.AddAuthentication(options =>
     // of IdentityServer.
     // to change, set SignedOutCallbackPath
     options.SaveTokens = true;
+    options.GetClaimsFromUserInfoEndpoint = true;
 });
 
 var app = builder.Build();
