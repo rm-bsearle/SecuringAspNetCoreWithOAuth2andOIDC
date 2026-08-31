@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.JsonWebTokens;
@@ -43,6 +44,9 @@ builder.Services.AddAuthentication(options =>
     // to change, set SignedOutCallbackPath
     options.SaveTokens = true;
     options.GetClaimsFromUserInfoEndpoint = true;
+    options.ClaimActions.Remove("aud");
+    options.ClaimActions.DeleteClaim("sid");
+    options.ClaimActions.DeleteClaim("idp");
 });
 
 var app = builder.Build();
