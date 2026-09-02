@@ -17,4 +17,9 @@ public class AuthenticationController : Controller
         await HttpContext.SignOutAsync(
             OpenIdConnectDefaults.AuthenticationScheme);
     }
+
+    public IActionResult AccessDenied()
+    {
+        return View();
+    }
 }
