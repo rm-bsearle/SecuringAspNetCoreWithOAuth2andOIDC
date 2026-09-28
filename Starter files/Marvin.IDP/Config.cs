@@ -44,6 +44,9 @@ public static class Config
                 ClientName = "Image Gallery",
                 ClientId = "imagegalleryclient",
                 AllowedGrantTypes = GrantTypes.Code,
+                // AccessTokenLifetime = 120,
+                // AuthorizationCodeLifetime = ...
+                // IdentityTokenLifetime = ...
                 RedirectUris =
                 {
                     "https://localhost:7184/signin-oidc",
