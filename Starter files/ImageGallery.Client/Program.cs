@@ -58,6 +58,7 @@ builder.Services.AddAuthentication(options =>
     options.Scope.Add("imagegalleryapi.write");
     options.Scope.Add("imagegalleryapi.read");
     options.Scope.Add("country");
+    options.Scope.Add("offline_access");
     options.ClaimActions.MapJsonKey("role",  "role");
     options.ClaimActions.MapUniqueJsonKey("country", "country");
     options.TokenValidationParameters = new()
