@@ -25,6 +25,7 @@ public static class Config
                     "imagegalleryapi.write",
                     "imagegalleryapi.read",
                 },
+                ApiSecrets = { new Secret("apisecret".Sha256()) },
             }
         };
 
@@ -43,6 +44,7 @@ public static class Config
             {
                 ClientName = "Image Gallery",
                 ClientId = "imagegalleryclient",
+                AccessTokenType = AccessTokenType.Reference,
                 AllowOfflineAccess = true,
                 AllowedGrantTypes = GrantTypes.Code,
                 UpdateAccessTokenClaimsOnRefresh = true,
