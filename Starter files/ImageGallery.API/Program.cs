@@ -32,7 +32,6 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options => { options.MapInboundClaims = false; });
     // .AddJwtBearer(options =>
     // {
     //     options.MapInboundClaims = false;
@@ -45,14 +44,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     //         ValidTypes = ["at+jwt"],
     //     };
     // });
-    // .AddOAuth2Introspection(options =>
-    // {
-    //     options.Authority = "https://localhost:5001";
-    //     options.ClientId = "imagegalleryapi";
-    //     options.ClientSecret = "apisecret";
-    //     options.NameClaimType = "given_name";
-    //     options.RoleClaimType = "role";
-    // });
+    .AddOAuth2Introspection(options =>
+    {
+        options.Authority = "https://localhost:5001";
+        options.ClientId = "imagegalleryapi";
+        options.ClientSecret = "apisecret";
+        options.NameClaimType = "given_name";
+        options.RoleClaimType = "role";
+    });
 
 builder.Services.AddAuthorization(authorizationOptions =>
 {
