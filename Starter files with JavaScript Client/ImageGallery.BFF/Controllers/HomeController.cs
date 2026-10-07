@@ -1,9 +1,11 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ImageGallery.BFF.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ImageGallery.BFF.Controllers;
 
+[Authorize]
 public class HomeController : Controller
 {
     public IActionResult Index()
