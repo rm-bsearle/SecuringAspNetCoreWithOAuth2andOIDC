@@ -16,8 +16,8 @@ builder.Services.AddHttpClient("IDPClient", client =>
 
 JsonWebTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-const string bffCookieScheme = "bffCookieScheme";
-const string bffChallengeScheme = "bffChallengeScheme";
+const string bffCookieScheme = "BFFCookieScheme";
+const string bffChallengeScheme = "BFFChallengeScheme";
 
 builder.Services.AddAuthentication(options =>
 {
