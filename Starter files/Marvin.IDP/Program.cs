@@ -12,15 +12,21 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Host.UseSerilog((ctx, lc) => lc
-        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
+        .WriteTo.Console(
+            outputTemplate:
+            "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
         .Enrich.FromLogContext()
         .ReadFrom.Configuration(ctx.Configuration));
 
     var app = builder
         .ConfigureServices()
         .ConfigurePipeline();
-    
+
     app.Run();
+}
+catch (HostAbortedException)
+{
+    // eat exception, cfr https://github.com/dotnet/efcore/issues/29809
 }
 catch (Exception ex)
 {
